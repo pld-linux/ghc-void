@@ -6,23 +6,21 @@
 Summary:	A Haskell 98 logically uninhabited data type
 Summary(pl.UTF-8):	Logicznie niezamieszkały typ danych Haskella 98
 Name:		ghc-%{pkgname}
-Version:	0.6.1
+Version:	0.7.3
 Release:	1
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/void
 Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	50c7aa039d96ed6b180fbede1c5f8c4a
+# Source0-md5:	62eb3c78a01d7545551f7961ec5f2340
 URL:		http://hackage.haskell.org/package/void
 BuildRequires:	ghc >= 6.12.3
 BuildRequires:	ghc-base >= 3
-BuildRequires:	ghc-base < 10
 BuildRequires:	ghc-hashable >= 1.1
 BuildRequires:	ghc-semigroups >= 0.8.2
 %if %{with prof}
 BuildRequires:	ghc-prof >= 6.12.3
 BuildRequires:	ghc-base-prof >= 3
-BuildRequires:	ghc-base-prof < 10
 BuildRequires:	ghc-hashable-prof >= 1.1
 BuildRequires:	ghc-semigroups-prof >= 0.8.2
 %endif
@@ -30,7 +28,6 @@ BuildRequires:	rpmbuild(macros) >= 1.608
 Requires(post,postun):	/usr/bin/ghc-pkg
 %requires_eq	ghc
 Requires:	ghc-base >= 3
-Requires:	ghc-base < 10
 Requires:	ghc-hashable >= 1.1
 Requires:	ghc-semigroups >= 0.8.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -55,7 +52,6 @@ Summary(pl.UTF-8):	Biblioteka profilująca %{pkgname} dla GHC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ghc-base-prof >= 3
-Requires:	ghc-base-prof < 10
 Requires:	ghc-hashable-prof >= 1.1
 Requires:	ghc-semigroups-prof >= 0.8.2
 
@@ -120,18 +116,18 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG.markdown LICENSE README.markdown
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/HSvoid-%{version}.o
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvoid-%{version}.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvoid-%{version}-*.so
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvoid-%{version}-*.a
+%exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvoid-%{version}-*_p.a
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Void.hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Void
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Void/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Void/*.dyn_hi
 
 %if %{with prof}
 %files prof
 %defattr(644,root,root,755)
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvoid-%{version}_p.a
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Void.p_hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvoid-%{version}-*_p.a
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Void/*.p_hi
 %endif
 

@@ -7,7 +7,7 @@ Summary:	A Haskell 98 logically uninhabited data type
 Summary(pl.UTF-8):	Logicznie niezamieszkały typ danych Haskella 98
 Name:		ghc-%{pkgname}
 Version:	0.7.3
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/void
